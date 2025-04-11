@@ -46,9 +46,11 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <p>Use AI to create a resume based on your experience and the job requirements.</p>
+            <Link href={"/dashboard/resume-generator"}>
             <Button variant="default" className="w-full" aria-label="Generate Resume">
               Generate Resume
             </Button>
+            </Link>
           </CardContent>
         </Card>
 
@@ -58,9 +60,11 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <p>Craft a custom cover letter that matches the job role perfectly.</p>
+            <Link href={"/dashboard/cover-letter-generator"}>
             <Button variant="default" className="w-full" aria-label="Generate Cover Letter">
               Generate Cover Letter
             </Button>
+            </Link>
           </CardContent>
         </Card>
 
@@ -70,9 +74,11 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <p>Track and view your previously generated resumes, letters, and applications.</p>
+            <Link href={"/dashboard/saved"}>
             <Button variant="outline" className="w-full" aria-label="View Saved Applications">
               View Saved
             </Button>
+            </Link>
           </CardContent>
         </Card>
       </div>
