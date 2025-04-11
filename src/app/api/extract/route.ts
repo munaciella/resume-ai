@@ -1,11 +1,15 @@
+import { supabaseServer } from "@/lib/supabase-server";
+import { auth } from "@clerk/nextjs/server"; // App router auth
+import OpenAI from "openai";
 import { NextResponse } from "next/server";
-import { OpenAI } from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
 export async function POST(req: Request) {
+  const { userId } = await auth();
+  if (!userId)
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
   const { jobDescription } = await req.json();
 
   const prompt = `
@@ -33,10 +37,29 @@ ${jobDescription}
   const rawText = completion.choices[0].message.content;
 
   try {
-    const json = JSON.parse(rawText || "{}");
-    return NextResponse.json(json);
+    const parsed = JSON.parse(rawText || "{}");
+
+    const { error } = await supabaseServer.from("parsed_jobs").insert({
+      user_id: userId,
+      job_text: jobDescription,
+      skills: Array.isArray(parsed.skills) ? parsed.skills : [],
+      experience: Array.isArray(parsed.experience) ? parsed.experience : [],
+    });
+
+    if (error) {
+      console.error("Supabase insert error:", error);
+      return NextResponse.json(
+        { error: "Database insert failed" },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(parsed);
   } catch (err) {
     console.error("JSON parse error:", err);
-    return NextResponse.json({ error: "Invalid response format" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Invalid response format" },
+      { status: 500 }
+    );
   }
 }
