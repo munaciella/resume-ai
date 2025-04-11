@@ -2,6 +2,7 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function DashboardPage() {
   const { userId } = await auth();
@@ -23,17 +24,21 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
-          <CardHeader>
-            <CardTitle>📄 Paste Job Description</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p>Start by pasting a job description. We'll extract key skills and tailor your resume.</p>
-            <Button variant="default" className="w-full" aria-label="Go to Job Parser">
-              Go to Job Parser
-            </Button>
-          </CardContent>
-        </Card>
+  <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
+    <CardHeader>
+      <CardTitle>📄 Paste Job Description</CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-4">
+      <p>
+        Start by pasting a job description. We'll extract key skills and tailor your resume.
+      </p>
+      <Link href="/dashboard/job-parser">
+        <Button variant="default" className="w-full" aria-label="Go to Job Parser">
+          Go to Job Parser
+        </Button>
+      </Link>
+    </CardContent>
+  </Card>
 
         <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
           <CardHeader>
