@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 import logo from "../../public/logo.png"
+import ThemeToggle from "./ThemeToggle"
 
 const Navbar = () => {
   return (
@@ -20,7 +21,7 @@ const Navbar = () => {
       </Link>
 
       <div className="px-5 flex space-x-2 items-center cursor-pointer">
-        {/* <ThemeToggle /> */}
+        <ThemeToggle />
 
         <UserButton />
 
