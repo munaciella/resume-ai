@@ -24,13 +24,13 @@ export default async function SavedJobsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 space-y-6">
+    <div className="max-w-7xl mx-auto px-4 py-10 space-y-6">
       <h1 className="text-3xl font-bold text-[--primary]">📥 Saved Jobs</h1>
       <p className="text-muted-foreground text-lg">
         Here's everything you've parsed so far.
       </p>
 
-      <div className="grid sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-6">
         {jobs.map((job) => (
           <Card key={job.id} className="rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
             <CardHeader>
@@ -51,6 +51,11 @@ export default async function SavedJobsPage() {
               <Link href={`/dashboard/resume-generator?jobId=${job.id}`}>
                 <Button className="mt-4 w-full" variant="default">
                   Generate Resume
+                </Button>
+              </Link>
+              <Link href={`/dashboard/cover-letter-generator?jobId=${job.id}`}>
+                <Button className="mt-2 w-full" variant="outline">
+                  Generate Cover Letter
                 </Button>
               </Link>
             </CardContent>

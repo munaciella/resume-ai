@@ -39,16 +39,6 @@ const Navbar = () => {
             <DropdownMenuItem asChild>
               <Link href="/dashboard/saved">💾 Saved Jobs</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/dashboard/resume-generator">
-                📄 Resume Generator
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/dashboard/cover-letter-generator">
-                💌 Cover Letter Generator
-              </Link>
-            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
