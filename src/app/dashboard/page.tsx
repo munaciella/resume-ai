@@ -13,7 +13,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 space-y-8">
+    <div className="max-w-6xl mx-auto px-4 py-10 space-y-8">
       <div className="space-y-2">
         <h1 className="text-3xl font-bold text-[--primary]">
           Welcome, {user?.firstName || "Job Seeker"} 👋
@@ -40,7 +40,7 @@ export default async function DashboardPage() {
     </CardContent>
   </Card>
 
-        <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
+        {/* <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
           <CardHeader>
             <CardTitle>📝 Generate Resume</CardTitle>
           </CardHeader>
@@ -66,7 +66,7 @@ export default async function DashboardPage() {
             </Button>
             </Link>
           </CardContent>
-        </Card>
+        </Card> */}
 
         <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
           <CardHeader>

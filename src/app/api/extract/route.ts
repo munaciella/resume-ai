@@ -1,5 +1,5 @@
 import { supabaseServer } from "@/lib/supabase-server";
-import { auth } from "@clerk/nextjs/server"; // App router auth
+import { auth } from "@clerk/nextjs/server";
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
@@ -39,12 +39,16 @@ ${jobDescription}
   try {
     const parsed = JSON.parse(rawText || "{}");
 
-    const { error } = await supabaseServer.from("parsed_jobs").insert({
-      user_id: userId,
-      job_text: jobDescription,
-      skills: Array.isArray(parsed.skills) ? parsed.skills : [],
-      experience: Array.isArray(parsed.experience) ? parsed.experience : [],
-    });
+    const { data, error } = await supabaseServer
+      .from("parsed_jobs")
+      .insert({
+        user_id: userId,
+        job_text: jobDescription,
+        skills: Array.isArray(parsed.skills) ? parsed.skills : [],
+        experience: Array.isArray(parsed.experience) ? parsed.experience : [],
+      })
+      .select("id")
+      .single();
 
     if (error) {
       console.error("Supabase insert error:", error);
@@ -54,7 +58,7 @@ ${jobDescription}
       );
     }
 
-    return NextResponse.json(parsed);
+    return NextResponse.json({ ...parsed, id: data?.id });
   } catch (err) {
     console.error("JSON parse error:", err);
     return NextResponse.json(
