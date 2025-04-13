@@ -19,65 +19,86 @@ export default async function DashboardPage() {
           Welcome, {user?.firstName || "Job Seeker"} 👋
         </h1>
         <p className="text-muted-foreground text-lg">
-          Let’s help you land your next role with an AI-powered resume & cover letter.
+          Let’s help you land your next role with an AI-powered resume & cover
+          letter.
         </p>
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2">
-  <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
-    <CardHeader>
-      <CardTitle>📄 Paste Job Description</CardTitle>
-    </CardHeader>
-    <CardContent className="space-y-4">
-      <p>
-        Start by pasting a job description. We'll extract key skills and tailor your resume.
-      </p>
-      <Link href="/dashboard/job-parser">
-        <Button variant="default" className="w-full" aria-label="Go to Job Parser">
-          Go to Job Parser
-        </Button>
-      </Link>
-    </CardContent>
-  </Card>
-
-        {/* <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
+        <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
           <CardHeader>
-            <CardTitle>📝 Generate Resume</CardTitle>
+            <CardTitle>📄 Paste Job Description</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p>Use AI to create a resume based on your experience and the job requirements.</p>
-            <Link href={"/dashboard/resume-generator"}>
-            <Button variant="default" className="w-full" aria-label="Generate Resume">
-              Generate Resume
-            </Button>
+            <p>
+              Start by pasting a job description. We'll extract key skills and
+              tailor your resume.
+            </p>
+            <Link href="/dashboard/job-parser">
+              <Button
+                variant="default"
+                className="w-full"
+                aria-label="Go to Job Parser"
+              >
+                Go to Job Parser
+              </Button>
             </Link>
           </CardContent>
         </Card>
 
         <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
           <CardHeader>
-            <CardTitle>💌 Generate Cover Letter</CardTitle>
+            <CardTitle>📥 Saved Job Details</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p>Craft a custom cover letter that matches the job role perfectly.</p>
-            <Link href={"/dashboard/cover-letter-generator"}>
-            <Button variant="default" className="w-full" aria-label="Generate Cover Letter">
-              Generate Cover Letter
-            </Button>
+            <p>
+              View and edit your previously saved job skills and experience
+              based on the job description.
+            </p>
+            <Link href={"/dashboard/saved"}>
+              <Button
+                variant="outline"
+                className="w-full"
+                aria-label="View Saved Applications"
+              >
+                View Saved Job Details
+              </Button>
             </Link>
           </CardContent>
-        </Card> */}
+        </Card>
 
         <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
           <CardHeader>
-            <CardTitle>📥 Saved Applications</CardTitle>
+            <CardTitle>📋 Job Application Tracker</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p>Track and view your previously generated resumes, letters, and applications.</p>
-            <Link href={"/dashboard/saved"}>
-            <Button variant="outline" className="w-full" aria-label="View Saved Applications">
-              View Saved
-            </Button>
+            <p>View, edit, sort and filter all saved job applications</p>
+            <Link href={"/dashboard/job-applications"}>
+              <Button
+                variant="default"
+                className="w-full"
+                aria-label="Job Application Tracker"
+              >
+                View Applications
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow duration-300 rounded-xl">
+          <CardHeader>
+            <CardTitle>📝 Add New Job</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p>Create a new job to the application tracker and add notes.</p>
+            <Link href={"/dashboard/job-applications/new"}>
+              <Button
+                variant="default"
+                className="w-full"
+                aria-label="Add New Job Application"
+              >
+                Add New Application
+              </Button>
             </Link>
           </CardContent>
         </Card>
