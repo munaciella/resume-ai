@@ -37,8 +37,11 @@ const Navbar = () => {
               <Link href="/dashboard/job-parser">📄 Job Parser</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/dashboard/saved">💾 Saved Jobs</Link>
+              <Link href="/dashboard/saved">💾 Saved Job Details</Link>
             </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/dashboard/job-applications">📋 Your Applications</Link>
+              </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 

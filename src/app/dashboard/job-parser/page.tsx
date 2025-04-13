@@ -32,7 +32,7 @@ export default function JobParserPage() {
       });
 
       const data = await res.json();
-      setResult(data); // Make sure your /api/extract returns the `id` of the new job
+      setResult(data);
     } catch (err) {
       console.error('Extraction failed:', err);
     } finally {
@@ -56,7 +56,7 @@ export default function JobParserPage() {
       />
 
       <Button onClick={handleExtract} disabled={loading}>
-        {loading ? <Loader2 className="animate-spin h-4 w-4" /> : 'Extract Key Skills'}
+        {loading ? <Loader2 className="animate-spin h-16 w-16 texy-primary" /> : 'Extract Key Skills'}
       </Button>
 
       {result && (
@@ -87,7 +87,7 @@ export default function JobParserPage() {
 
           <div className="flex flex-wrap gap-4 pt-4">
             <Button variant="secondary" onClick={() => router.push("/dashboard/saved")}>
-              📥 View Saved Jobs
+              📥 View Saved Job Details
             </Button>
             <Button variant="default" onClick={() => router.push(`/dashboard/resume-generator?jobId=${result.id}`)}>
               📄 Generate Resume
