@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2, Save } from "lucide-react";
@@ -14,6 +14,8 @@ export default function ResumeGeneratorPage() {
   const [loading, setLoading] = useState(true);
   const [resume, setResume] = useState("");
   const [editing, setEditing] = useState(false);
+
+    const router = useRouter();
 
   useEffect(() => {
     const fetchResume = async () => {
@@ -70,6 +72,9 @@ export default function ResumeGeneratorPage() {
         <Button onClick={handleSave} variant="default">
           <Save className="w-4 h-4 mr-2" /> Save
         </Button>
+        <Button variant="secondary" onClick={() => router.push("/dashboard/saved")}>
+              📥 View Saved Job Details
+            </Button>
       </div>
 
       {editing ? (

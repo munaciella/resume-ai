@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { toast } from "sonner";
 
 type ParsedResult = {
   id: string;
@@ -14,27 +15,46 @@ type ParsedResult = {
 };
 
 export default function JobParserPage() {
-  const [jobDescription, setJobDescription] = useState('');
+  const [jobDescription, setJobDescription] = useState("");
   const [result, setResult] = useState<ParsedResult | null>(null);
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
   const handleExtract = async () => {
+    if (!jobDescription.trim()) {
+      toast.warning("Please paste a job description first.", {
+        style: { backgroundColor: "#FBBF24", color: "black" },
+      });
+      return;
+    }
+
     setLoading(true);
+
     try {
-      const res = await fetch('/api/extract', {
-        method: 'POST',
+      const res = await fetch("/api/extract", {
+        method: "POST",
         body: JSON.stringify({ jobDescription }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
+      if (!res.ok) {
+        throw new Error("Failed to extract job details");
+      }
+
       const data = await res.json();
       setResult(data);
+
+      toast.success("Job details extracted successfully!", {
+        style: { backgroundColor: "#16a34a", color: "white" },
+      });
     } catch (err) {
-      console.error('Extraction failed:', err);
+      toast.error("Error extracting job details. Please try again.", {
+        style: { backgroundColor: "#dc2626", color: "white" },
+      });
+      console.error("Extraction failed:", err);
     } finally {
       setLoading(false);
     }
@@ -42,9 +62,12 @@ export default function JobParserPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 space-y-6">
-      <h1 className="text-3xl font-bold text-primary">🧠 Job Description Parser</h1>
+      <h1 className="text-3xl font-bold text-primary">
+        🧠 Job Description Parser
+      </h1>
       <p className="text-muted-foreground">
-        Paste a job description below and we&apos;ll extract relevant skills, qualifications, and requirements.
+        Paste a job description below and we&apos;ll extract relevant skills,
+        qualifications, and requirements.
       </p>
 
       <Textarea
@@ -56,7 +79,11 @@ export default function JobParserPage() {
       />
 
       <Button onClick={handleExtract} disabled={loading}>
-        {loading ? <Loader2 className="animate-spin h-16 w-16 texy-primary" /> : 'Extract Key Skills'}
+        {loading ? (
+          <Loader2 className="animate-spin h-4 w-4 text-white" />
+        ) : (
+          "Extract Key Skills"
+        )}
       </Button>
 
       {result && (
@@ -70,7 +97,9 @@ export default function JobParserPage() {
                 <div>
                   <p className="font-medium">💼 Skills:</p>
                   <ul className="list-disc list-inside text-sm">
-                    {result.skills.map((skill: string, i: number) => <li key={i}>{skill}</li>)}
+                    {result.skills.map((skill: string, i: number) => (
+                      <li key={i}>{skill}</li>
+                    ))}
                   </ul>
                 </div>
               )}
@@ -78,7 +107,9 @@ export default function JobParserPage() {
                 <div>
                   <p className="font-medium">📚 Experience:</p>
                   <ul className="list-disc list-inside text-sm">
-                    {result.experience.map((exp: string, i: number) => <li key={i}>{exp}</li>)}
+                    {result.experience.map((exp: string, i: number) => (
+                      <li key={i}>{exp}</li>
+                    ))}
                   </ul>
                 </div>
               )}
@@ -86,13 +117,28 @@ export default function JobParserPage() {
           </Card>
 
           <div className="flex flex-wrap gap-4 pt-4">
-            <Button variant="secondary" onClick={() => router.push("/dashboard/saved")}>
+            <Button
+              variant="secondary"
+              onClick={() => router.push("/dashboard/saved")}
+            >
               📥 View Saved Job Details
             </Button>
-            <Button variant="default" onClick={() => router.push(`/dashboard/resume-generator?jobId=${result.id}`)}>
+            <Button
+              variant="default"
+              onClick={() =>
+                router.push(`/dashboard/resume-generator?jobId=${result.id}`)
+              }
+            >
               📄 Generate Resume
             </Button>
-            <Button variant="default" onClick={() => router.push(`/dashboard/cover-letter-generator?jobId=${result.id}`)}>
+            <Button
+              variant="default"
+              onClick={() =>
+                router.push(
+                  `/dashboard/cover-letter-generator?jobId=${result.id}`
+                )
+              }
+            >
               💌 Generate Cover Letter
             </Button>
           </div>

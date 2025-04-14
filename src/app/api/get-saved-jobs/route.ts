@@ -16,7 +16,13 @@ export async function GET() {
       applications (
         status,
         notes
+      ),
+      resumes (
+        id
       )
+      // cover_letters (
+      //   id
+      // )
     `)
     .eq("user_id", userId)
     .order("created_at", { ascending: false });
