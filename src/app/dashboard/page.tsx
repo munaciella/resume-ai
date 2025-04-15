@@ -13,7 +13,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10 space-y-8">
+    <div className="max-w-6xl mx-auto px-4 py-14 space-y-8">
       <div className="space-y-2">
         <h1 className="text-3xl font-bold text-[--primary]">
           Welcome, {user?.firstName || "Job Seeker"} 👋

@@ -103,7 +103,7 @@ export default function ApplicationsClientPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10 space-y-6">
+    <div className="max-w-7xl mx-auto px-4 py-14 space-y-6">
       <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
         <h1 className="text-3xl font-bold text-primary">
           📋 My Job Application Tracker
