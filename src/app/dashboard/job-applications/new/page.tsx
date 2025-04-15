@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from '@/components/ui/select';
 import { Loader2 } from 'lucide-react';
+import { toast } from "sonner";
 
 const statuses = ["Saved", "Applied", "Interview", "Offer", "Rejected"];
 
@@ -22,34 +23,50 @@ export default function NewApplicationPage() {
 
   useEffect(() => {
     if (!jobId) {
+      toast.warning("⚠️ Please select a job before tracking an application.", {
+        style: {
+          backgroundColor: "#FACC15", // Yellow
+          color: "black",
+        },
+      });
+  
       setRedirecting(true);
       const timer = setTimeout(() => {
-        router.push('/dashboard/saved');
+        router.push("/dashboard/saved");
       }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [jobId, router]);
+  }, [jobId, router]);  
 
   const handleSubmit = async () => {
     if (!jobId) return;
     setSubmitting(true);
-
+  
     const res = await fetch("/api/save-application", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ jobId, status, notes }),
     });
-
+  
     if (!res.ok) {
-      console.error("Application save error");
-      alert("❌ Failed to save application.");
+      toast.error("❌ Failed to save application.", {
+        style: {
+          backgroundColor: "#DC2626",
+          color: "white",
+        },
+      });
     } else {
-      alert("✅ Application saved!");
-      router.push("/dashboard/saved");
+      toast.success("✅ Application saved successfully!", {
+        style: {
+          backgroundColor: "#16A34A",
+          color: "white",
+        },
+      });
+      router.push("/dashboard/job-applications");
     }
-
+  
     setSubmitting(false);
-  };
+  };  
 
   if (redirecting) {
     return (
@@ -62,8 +79,8 @@ export default function NewApplicationPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-10 space-y-6">
-      <h1 className="text-3xl font-bold text-primary">🎯 Add New Job Application To Track</h1>
+    <div className="max-w-2xl mx-auto px-4 py-14 space-y-6">
+      <h1 className="text-3xl font-bold text-primary">🎯 Add New or Edit Job Application To Track</h1>
       <p className="text-muted-foreground">Save the status and notes for this job.</p>
 
       <div className="space-y-4">

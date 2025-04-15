@@ -61,7 +61,7 @@ export default function JobParserPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10 space-y-6">
+    <div className="max-w-3xl mx-auto px-4 py-14 space-y-6">
       <h1 className="text-3xl font-bold text-primary">
         🧠 Job Description Parser
       </h1>

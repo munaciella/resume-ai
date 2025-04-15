@@ -30,7 +30,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased px-4 pt-24 pb-10 min-h-screen`}
         >
           <ThemeProvider
             attribute="class"
@@ -38,12 +38,16 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          <Navbar />
-          {children}
+            <Navbar />
+            {children}
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                style: { fontSize: "14px" },
+                duration: 4000,
+              }}
+            />
           </ThemeProvider>
-          <Toaster 
-          position="bottom-right"
-          />
         </body>
       </html>
     </ClerkProvider>
