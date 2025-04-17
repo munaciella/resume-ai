@@ -11,7 +11,8 @@ export async function GET() {
 
   const { data, error } = await supabaseServer
     .from("parsed_jobs")
-    .select(`
+    .select(
+      `
       *,
       applications (
         status,
@@ -19,17 +20,21 @@ export async function GET() {
       ),
       resumes (
         id
-      )
-      // cover_letters (
-      //   id
-      // )
-    `)
+      ),
+      cover_letters (
+         id
+       )
+    `
+    )
     .eq("user_id", userId)
     .order("created_at", { ascending: false });
 
   if (error) {
     console.error("Error fetching saved jobs:", error.message);
-    return NextResponse.json({ error: "Failed to fetch saved jobs" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch saved jobs" },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json(data);

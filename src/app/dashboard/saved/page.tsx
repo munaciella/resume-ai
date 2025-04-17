@@ -37,7 +37,7 @@ type Job = {
     notes: string | null;
   }[];
   resumes?: { id: string }[];
-  //cover_letters?: { id: string }[];
+  cover_letters?: { id: string }[];
 };
 
 const statusColors: Record<string, string> = {
@@ -198,7 +198,7 @@ export default function SavedJobsPageClient() {
                     </Link>
                   )}
 
-                  {/* {job.cover_letters?.length ? (
+                  {job.cover_letters?.length ? (
                     <Link
                       href={`/dashboard/cover-letter-generator?jobId=${job.id}`}
                     >
@@ -214,7 +214,7 @@ export default function SavedJobsPageClient() {
                         Generate Cover Letter
                       </Button>
                     </Link>
-                  )} */}
+                  )}
 
                   {application ? (
                     <Link href={`/dashboard/job-applications`}>
