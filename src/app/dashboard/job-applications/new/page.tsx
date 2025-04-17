@@ -25,7 +25,7 @@ export default function NewApplicationPage() {
     if (!jobId) {
       toast.warning("⚠️ Please select a job before tracking an application.", {
         style: {
-          backgroundColor: "#FACC15", // Yellow
+          backgroundColor: "#FACC15",
           color: "black",
         },
       });
@@ -104,14 +104,14 @@ export default function NewApplicationPage() {
           <Label>Notes (optional)</Label>
           <Textarea
             rows={6}
-            placeholder="Add notes about the job, interview progress, etc."
+            placeholder="Add notes about the job, company name, interview progress, etc."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             className="mt-1 resize-none"
           />
         </div>
 
-        <Button onClick={handleSubmit} disabled={submitting}>
+        <Button onClick={handleSubmit} disabled={submitting} className='cursor-pointer'>
           {submitting ? "Saving..." : "Save Application"}
         </Button>
       </div>

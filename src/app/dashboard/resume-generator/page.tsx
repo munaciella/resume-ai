@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2, Save } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { toast } from "sonner"; // ✅ ADD THIS
 
 export default function ResumeGeneratorPage() {
   const searchParams = useSearchParams();
@@ -14,8 +15,9 @@ export default function ResumeGeneratorPage() {
   const [loading, setLoading] = useState(true);
   const [resume, setResume] = useState("");
   const [editing, setEditing] = useState(false);
+  const [saving, setSaving] = useState(false); // ✅
 
-    const router = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchResume = async () => {
@@ -25,6 +27,9 @@ export default function ResumeGeneratorPage() {
         setResume(data.content);
       } catch (err) {
         console.error("Error:", err);
+        toast.error("❌ Failed to generate resume.", {
+          style: { backgroundColor: "#DC2626", color: "white" },
+        });
       } finally {
         setLoading(false);
       }
@@ -36,6 +41,8 @@ export default function ResumeGeneratorPage() {
   const handleSave = async () => {
     if (!resume || !jobId) return;
 
+    setSaving(true);
+
     const res = await fetch("/api/save-resume", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -46,9 +53,16 @@ export default function ResumeGeneratorPage() {
 
     if (!res.ok) {
       console.error("Save error:", data?.error || "Unknown error");
+      toast.error("❌ Failed to save resume.", {
+        style: { backgroundColor: "#DC2626", color: "white" },
+      });
     } else {
-      alert("✅ Resume saved!");
+      toast.success("✅ Resume saved successfully!", {
+        style: { backgroundColor: "#16A34A", color: "white" },
+      });
     }
+
+    setSaving(false);
   };
 
   if (loading) {
@@ -66,15 +80,26 @@ export default function ResumeGeneratorPage() {
       </h1>
 
       <div className="flex justify-end gap-3">
-        <Button onClick={() => setEditing((prev) => !prev)} variant="outline">
+        <Button 
+        onClick={() => setEditing((prev) => !prev)} 
+        variant="outline"
+        className="cursor-pointer"
+        >
           {editing ? "Preview" : "Edit"}
         </Button>
-        <Button onClick={handleSave} variant="default">
-          <Save className="w-4 h-4 mr-2" /> Save
+        <Button onClick={handleSave} variant="default" disabled={saving} className="cursor-pointer">
+          {saving ? (
+            <Loader2 className="h-4 w-4 animate-spin mr-2" />
+          ) : (
+            <Save className="w-4 h-4 mr-2" />
+          )}
+          {saving ? "Saving..." : "Save"}
         </Button>
-        <Button variant="secondary" onClick={() => router.push("/dashboard/saved")}>
-              📥 View Saved Job Details
-            </Button>
+        <Button variant="secondary" onClick={() => router.push("/dashboard/saved")}
+        className="cursor-pointer"
+          >
+          📥 View Saved Job Details
+        </Button>
       </div>
 
       {editing ? (
@@ -101,10 +126,7 @@ export default function ResumeGeneratorPage() {
                 <h3 className="text-xl font-medium mt-4 mb-2" {...props} />
               ),
               ul: ({ ...props }) => (
-                <ul
-                  className="list-disc list-inside space-y-1 mb-4"
-                  {...props}
-                />
+                <ul className="list-disc list-inside space-y-1 mb-4" {...props} />
               ),
               li: ({ ...props }) => (
                 <li className="leading-relaxed" {...props} />

@@ -186,13 +186,13 @@ export default function SavedJobsPageClient() {
 
                   {job.resumes?.length ? (
                     <Link href={`/dashboard/resume-generator?jobId=${job.id}`}>
-                      <Button className="mt-2 w-full" variant="default">
+                      <Button className="mt-2 w-full cursor-pointer" variant="default">
                         View Resume
                       </Button>
                     </Link>
                   ) : (
                     <Link href={`/dashboard/resume-generator?jobId=${job.id}`}>
-                      <Button className="mt-2 w-full" variant="default">
+                      <Button className="mt-2 w-full cursor-pointer" variant="default">
                         Generate Resume
                       </Button>
                     </Link>
@@ -202,7 +202,7 @@ export default function SavedJobsPageClient() {
                     <Link
                       href={`/dashboard/cover-letter-generator?jobId=${job.id}`}
                     >
-                      <Button className="mt-2 w-full" variant="outline">
+                      <Button className="mt-2 w-full cursor-pointer" variant="outline">
                         View Cover Letter
                       </Button>
                     </Link>
@@ -210,7 +210,7 @@ export default function SavedJobsPageClient() {
                     <Link
                       href={`/dashboard/cover-letter-generator?jobId=${job.id}`}
                     >
-                      <Button className="mt-2 w-full" variant="outline">
+                      <Button className="mt-2 w-full cursor-pointer" variant="outline">
                         Generate Cover Letter
                       </Button>
                     </Link>
@@ -218,7 +218,7 @@ export default function SavedJobsPageClient() {
 
                   {application ? (
                     <Link href={`/dashboard/job-applications`}>
-                      <Button className="mt-2 w-full" variant="secondary">
+                      <Button className="mt-2 w-full cursor-pointer" variant="secondary">
                         View Application
                       </Button>
                     </Link>
@@ -226,7 +226,7 @@ export default function SavedJobsPageClient() {
                     <Link
                       href={`/dashboard/job-applications/new?jobId=${job.id}`}
                     >
-                      <Button className="mt-2 w-full" variant="secondary">
+                      <Button className="mt-2 w-full cursor-pointer" variant="secondary">
                         Track Application
                       </Button>
                     </Link>
@@ -235,7 +235,7 @@ export default function SavedJobsPageClient() {
                   {/* Delete with Dialog */}
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
-                      <Button className="mt-2 w-full" variant="destructive">
+                      <Button className="mt-2 w-full cursor-pointer" variant="destructive">
                         Delete Job Details
                       </Button>
                     </AlertDialogTrigger>

@@ -198,7 +198,7 @@ export default function ApplicationsClientPage() {
                       <Link
                         href={`/dashboard/resume-generator?jobId=${job.id}`}
                       >
-                        <Button className="w-full" variant="default">
+                        <Button className="w-full cursor-pointer" variant="default">
                           View Resume
                         </Button>
                       </Link>
@@ -206,7 +206,7 @@ export default function ApplicationsClientPage() {
                       <Link
                         href={`/dashboard/resume-generator?jobId=${job.id}`}
                       >
-                        <Button className="w-full" variant="default">
+                        <Button className="w-full cursor-pointer" variant="default">
                           Generate Resume
                         </Button>
                       </Link>
@@ -216,7 +216,7 @@ export default function ApplicationsClientPage() {
                       <Link
                         href={`/dashboard/cover-letter-generator?jobId=${job.id}`}
                       >
-                        <Button className="w-full" variant="outline">
+                        <Button className="w-full cursor-pointer" variant="outline">
                           View Cover Letter
                         </Button>
                       </Link>
@@ -224,7 +224,7 @@ export default function ApplicationsClientPage() {
                       <Link
                         href={`/dashboard/cover-letter-generator?jobId=${job.id}`}
                       >
-                        <Button className="w-full" variant="outline">
+                        <Button className="w-full cursor-pointer" variant="outline">
                           Generate Cover Letter
                         </Button>
                       </Link>
@@ -233,7 +233,7 @@ export default function ApplicationsClientPage() {
                     <Link
                       href={`/dashboard/job-applications/new?jobId=${job.id}`}
                     >
-                      <Button className="w-full" variant="secondary">
+                      <Button className="w-full cursor-pointer" variant="secondary">
                         Edit Application
                       </Button>
                     </Link>
@@ -241,7 +241,7 @@ export default function ApplicationsClientPage() {
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button
-                          className="mt-2 w-full"
+                          className="mt-2 w-full cursor-pointer"
                           variant="destructive"
                           disabled={deletingId === job.id}
                         >

@@ -78,7 +78,7 @@ export default function JobParserPage() {
         className="resize-none"
       />
 
-      <Button onClick={handleExtract} disabled={loading}>
+      <Button onClick={handleExtract} disabled={loading} className="cursor-pointer">
         {loading ? (
           <Loader2 className="animate-spin h-4 w-4 text-white" />
         ) : (
