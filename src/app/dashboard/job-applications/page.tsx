@@ -38,7 +38,7 @@ type Application = {
     experience: string[];
     created_at: string;
     resumes?: { id: string }[];         
-    //cover_letters?: { id: string }[];
+    cover_letters?: { id: string }[];
   };
 };
 
@@ -212,7 +212,7 @@ export default function ApplicationsClientPage() {
                       </Link>
                     )}
 
-                    {/* {job.cover_letters?.length ? (
+                    {job.cover_letters?.length ? (
                       <Link
                         href={`/dashboard/cover-letter-generator?jobId=${job.id}`}
                       >
@@ -228,7 +228,7 @@ export default function ApplicationsClientPage() {
                           Generate Cover Letter
                         </Button>
                       </Link>
-                    )} */}
+                    )}
 
                     <Link
                       href={`/dashboard/job-applications/new?jobId=${job.id}`}

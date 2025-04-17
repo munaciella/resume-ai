@@ -8,26 +8,26 @@ import { Loader2, Save } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
 
-export default function ResumeGeneratorPage() {
+export default function CoverLetterGeneratorPage() {
   const searchParams = useSearchParams();
   const jobId = searchParams?.get("jobId") || null;
 
   const [loading, setLoading] = useState(true);
-  const [resume, setResume] = useState("");
+  const [coverLetter, setCoverLetter] = useState("");
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const router = useRouter();
 
   useEffect(() => {
-    const fetchResume = async () => {
+    const fetchCoverLetter = async () => {
       try {
-        const res = await fetch(`/api/generate-resume?jobId=${jobId}`);
+        const res = await fetch(`/api/generate-cover-letter?jobId=${jobId}`);
         const data = await res.json();
-        setResume(data.content);
+        setCoverLetter(data.content);
       } catch (err) {
         console.error("Error:", err);
-        toast.error("❌ Failed to generate resume.", {
+        toast.error("❌ Failed to generate cover letter.", {
           style: { backgroundColor: "#DC2626", color: "white" },
         });
       } finally {
@@ -35,29 +35,29 @@ export default function ResumeGeneratorPage() {
       }
     };
 
-    if (jobId) fetchResume();
+    if (jobId) fetchCoverLetter();
   }, [jobId]);
 
   const handleSave = async () => {
-    if (!resume || !jobId) return;
+    if (!coverLetter || !jobId) return;
 
     setSaving(true);
 
-    const res = await fetch("/api/save-resume", {
+    const res = await fetch("/api/save-cover-letter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ jobId, content: resume }),
+      body: JSON.stringify({ jobId, content: coverLetter }),
     });
 
     const data = await res.json();
 
     if (!res.ok) {
       console.error("Save error:", data?.error || "Unknown error");
-      toast.error("❌ Failed to save resume.", {
+      toast.error("❌ Failed to save cover letter.", {
         style: { backgroundColor: "#DC2626", color: "white" },
       });
     } else {
-      toast.success("✅ Resume saved successfully!", {
+      toast.success("✅ Cover letter saved successfully!", {
         style: { backgroundColor: "#16A34A", color: "white" },
       });
     }
@@ -76,7 +76,7 @@ export default function ResumeGeneratorPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 space-y-6">
       <h1 className="text-3xl font-bold text-[--primary]">
-        📄 Resume Generator
+        📄 Cover Letter Generator
       </h1>
 
       <div className="flex justify-end gap-3">
@@ -104,14 +104,14 @@ export default function ResumeGeneratorPage() {
 
       {editing ? (
         <Textarea
-          value={resume}
-          onChange={(e) => setResume(e.target.value)}
+          value={coverLetter}
+          onChange={(e) => setCoverLetter(e.target.value)}
           rows={25}
           className="w-full"
         />
       ) : (
         <div
-          id="resume-preview"
+          id="cover-letter-preview"
           className="prose prose-neutral dark:prose-invert max-w-none bg-background text-foreground p-6 rounded-md"
         >
           <ReactMarkdown
@@ -136,7 +136,7 @@ export default function ResumeGeneratorPage() {
               ),
             }}
           >
-            {resume}
+            {coverLetter}
           </ReactMarkdown>
         </div>
       )}

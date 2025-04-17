@@ -21,7 +21,8 @@ export async function GET(req: NextRequest) {
       created_at,
       skills,
       experience,
-      resumes ( id )  
+      resumes ( id ),
+      cover_letters ( id )  
   )
   `
     )
