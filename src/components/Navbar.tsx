@@ -22,25 +22,25 @@ const Navbar = () => {
           <h1 className="font-bold text-xl">AI-Resume</h1>
         </Link>
 
-        <div className="px-5 flex space-x-2 items-center cursor-pointer">
+        <div className="px-5 flex space-x-2 items-center">
           {/* Dropdown Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="p-2 rounded-md border text-sm font-medium hover:bg-muted transition">
+              <button className="p-2 rounded-md border text-sm font-medium hover:bg-muted transition cursor-pointer">
                 <Menu className="h-4 w-4" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuItem asChild>
+              <DropdownMenuItem asChild className="cursor-pointer">
                 <Link href="/dashboard">🏠 Dashboard</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
+              <DropdownMenuItem asChild className="cursor-pointer">
                 <Link href="/dashboard/job-parser">📄 Job Parser</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
+              <DropdownMenuItem asChild className="cursor-pointer">
                 <Link href="/dashboard/saved">💾 Saved Job Details</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
+              <DropdownMenuItem asChild className="cursor-pointer">
                 <Link href="/dashboard/job-applications">
                   📋 Your Applications
                 </Link>

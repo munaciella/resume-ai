@@ -15,7 +15,7 @@ export default async function DashboardPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-14 space-y-8">
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold text-[--primary]">
+        <h1 className="text-3xl font-bold text-primary">
           Welcome, {user?.firstName || "Job Seeker"} 👋
         </h1>
         <p className="text-muted-foreground text-lg">
@@ -37,7 +37,7 @@ export default async function DashboardPage() {
             <Link href="/dashboard/job-parser">
               <Button
                 variant="default"
-                className="w-full"
+                className="w-full cursor-pointer"
                 aria-label="Go to Job Parser"
               >
                 Go to Job Parser
@@ -58,7 +58,7 @@ export default async function DashboardPage() {
             <Link href={"/dashboard/saved"}>
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full cursor-pointer"
                 aria-label="View Saved Applications"
               >
                 View Saved Job Details
@@ -76,7 +76,7 @@ export default async function DashboardPage() {
             <Link href={"/dashboard/job-applications"}>
               <Button
                 variant="default"
-                className="w-full"
+                className="w-full cursor-pointer"
                 aria-label="Job Application Tracker"
               >
                 View Applications
@@ -94,7 +94,7 @@ export default async function DashboardPage() {
             <Link href={"/dashboard/job-applications/new"}>
               <Button
                 variant="default"
-                className="w-full"
+                className="w-full cursor-pointer"
                 aria-label="Add New Job Application"
               >
                 Add New Application
