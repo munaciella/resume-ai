@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI-Resume",
-  description: "Generate your resume with AI",
+  title: "ApplyWise",
+  description: "AI-Powered Job Application Assistant",
 };
 
 export default function RootLayout({
