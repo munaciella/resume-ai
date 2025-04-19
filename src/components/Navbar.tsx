@@ -19,7 +19,7 @@ const Navbar = () => {
           <div className="w-fit">
             <Image src={logo} alt="logo" height={80} width={80} priority />
           </div>
-          <h1 className="font-bold text-xl">AI-Resume</h1>
+          <h1 className="font-bold text-xl">ApplyWise</h1>
         </Link>
 
         <div className="px-5 flex space-x-2 items-center">
@@ -50,14 +50,14 @@ const Navbar = () => {
 
           <ThemeToggle />
           <UserButton />
-          {/* <SignedOut>
+          <SignedOut>
             <SignInButton
               forceRedirectUrl="/dashboard"
               fallbackRedirectUrl="/"
               mode="modal"
             />
-          </SignedOut> */}
-          {process.env.NODE_ENV !== "production" && (
+          </SignedOut>
+          {/* {process.env.NODE_ENV !== "production" && (
             <SignedOut>
               <SignInButton
                 forceRedirectUrl="/dashboard"
@@ -65,7 +65,7 @@ const Navbar = () => {
                 mode="modal"
               />
             </SignedOut>
-          )}
+          )} */}
         </div>
       </div>
     </header>
