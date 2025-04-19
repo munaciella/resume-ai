@@ -3,10 +3,16 @@ import { OpenAI } from "openai";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+const allowedUserId = process.env.NEXT_PUBLIC_ALLOWED_USER_ID!;
+
 export async function GET(req: Request) {
   const { userId } = await auth();
   const url = new URL(req.url);
   const jobId = url.searchParams.get("jobId");
+
+  if (userId !== allowedUserId) {
+    return NextResponse.json({ error: "Access denied" }, { status: 403 });
+  }
 
   if (!userId || !jobId) {
     return NextResponse.json({ error: "Unauthorized or missing job ID" }, { status: 400 });

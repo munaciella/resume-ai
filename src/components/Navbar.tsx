@@ -50,13 +50,22 @@ const Navbar = () => {
 
           <ThemeToggle />
           <UserButton />
-          <SignedOut>
+          {/* <SignedOut>
             <SignInButton
               forceRedirectUrl="/dashboard"
               fallbackRedirectUrl="/"
               mode="modal"
             />
-          </SignedOut>
+          </SignedOut> */}
+          {process.env.NODE_ENV !== "production" && (
+            <SignedOut>
+              <SignInButton
+                forceRedirectUrl="/dashboard"
+                fallbackRedirectUrl="/"
+                mode="modal"
+              />
+            </SignedOut>
+          )}
         </div>
       </div>
     </header>
