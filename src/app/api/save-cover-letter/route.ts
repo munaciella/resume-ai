@@ -2,8 +2,15 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase-server";
 
+const allowedUserId = process.env.NEXT_PUBLIC_ALLOWED_USER_ID!;
+
 export async function POST(req: Request) {
   const { userId } = await auth();
+
+  if (userId !== allowedUserId) {
+    return NextResponse.json({ error: "Access denied" }, { status: 403 });
+  }
+  
   const { jobId, content } = await req.json();
 
   if (!userId || !jobId || !content) {

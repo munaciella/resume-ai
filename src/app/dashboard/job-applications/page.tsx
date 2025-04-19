@@ -26,6 +26,7 @@ import {
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
+import { InputWithButton } from "@/components/InputWithButton";
 
 type Application = {
   id: string;
@@ -37,7 +38,7 @@ type Application = {
     skills: string[];
     experience: string[];
     created_at: string;
-    resumes?: { id: string }[];         
+    resumes?: { id: string }[];
     cover_letters?: { id: string }[];
   };
 };
@@ -68,6 +69,7 @@ export default function ApplicationsClientPage() {
   const [sort, setSort] = useState("Newest");
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchApplications = async () => {
@@ -86,13 +88,21 @@ export default function ApplicationsClientPage() {
     if (status !== "All") {
       updated = updated.filter((app) => app.status === status);
     }
+
+    if (search.trim()) {
+      const query = search.toLowerCase();
+      updated = updated.filter((app) =>
+        app.notes?.toLowerCase().includes(query)
+      );
+    }
+
     updated.sort((a, b) =>
       sort === "Newest"
         ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         : new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
     );
     setFiltered(updated);
-  }, [status, sort, applications]);
+  }, [status, sort, applications, search]);
 
   if (loading) {
     return (
@@ -104,48 +114,64 @@ export default function ApplicationsClientPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-14 space-y-6">
-      <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
-        <h1 className="text-3xl font-bold text-primary">
-          📋 My Job Application Tracker
-        </h1>
-        <div className="flex gap-4">
-          <Select value={status} onValueChange={setStatus}>
-            <SelectTrigger className="w-[160px]">
-              <SelectValue placeholder="Filter by status" />
-            </SelectTrigger>
-            <SelectContent>
-              {statusOptions.map((s) => (
-                <SelectItem key={s} value={s}>
-                  {s}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select value={sort} onValueChange={setSort}>
-            <SelectTrigger className="w-[160px]">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              {sortOptions.map((s) => (
-                <SelectItem key={s} value={s}>
-                  {s}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      <p className="text-muted-foreground text-lg">
+  <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h1 className="text-3xl font-bold text-primary">
+        📋 My Job Application Tracker
+      </h1>
+      <p className="text-muted-foreground text-lg mt-4">
         Track your job application progress here.
       </p>
+    </div>
+
+    <div className="flex flex-col gap-2 sm:flex-row sm:items-center md:flex-row md:items-center md:gap-4">
+      <div className="flex gap-4">
+        <Select value={status} onValueChange={setStatus}>
+          <SelectTrigger className="w-[160px]">
+            <SelectValue placeholder="Filter by status" />
+          </SelectTrigger>
+          <SelectContent>
+            {statusOptions.map((s) => (
+              <SelectItem key={s} value={s}>
+                {s}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Select value={sort} onValueChange={setSort}>
+          <SelectTrigger className="w-[160px]">
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            {sortOptions.map((s) => (
+              <SelectItem key={s} value={s}>
+                {s}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* ✅ Search input will be stacked below filters on small screens only */}
+      <div className="w-full sm:w-auto">
+        <InputWithButton
+          value={search}
+          onChange={setSearch}
+          onClear={() => setSearch("")}
+        />
+      </div>
+    </div>
+  </div>
+
+
 
       {filtered.length === 0 ? (
         <div className="text-center text-muted-foreground py-20 text-base">
           😕 No saved job applications found for <strong>{status}</strong>.
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6">
           {filtered.map((app) => {
             const job = app.parsed_jobs;
             const badgeClass = statusColorMap[app.status];
@@ -198,7 +224,10 @@ export default function ApplicationsClientPage() {
                       <Link
                         href={`/dashboard/resume-generator?jobId=${job.id}`}
                       >
-                        <Button className="w-full cursor-pointer" variant="default">
+                        <Button
+                          className="w-full cursor-pointer"
+                          variant="default"
+                        >
                           View Resume
                         </Button>
                       </Link>
@@ -206,7 +235,10 @@ export default function ApplicationsClientPage() {
                       <Link
                         href={`/dashboard/resume-generator?jobId=${job.id}`}
                       >
-                        <Button className="w-full cursor-pointer" variant="default">
+                        <Button
+                          className="w-full cursor-pointer"
+                          variant="default"
+                        >
                           Generate Resume
                         </Button>
                       </Link>
@@ -216,7 +248,10 @@ export default function ApplicationsClientPage() {
                       <Link
                         href={`/dashboard/cover-letter-generator?jobId=${job.id}`}
                       >
-                        <Button className="w-full cursor-pointer" variant="outline">
+                        <Button
+                          className="w-full cursor-pointer"
+                          variant="outline"
+                        >
                           View Cover Letter
                         </Button>
                       </Link>
@@ -224,7 +259,10 @@ export default function ApplicationsClientPage() {
                       <Link
                         href={`/dashboard/cover-letter-generator?jobId=${job.id}`}
                       >
-                        <Button className="w-full cursor-pointer" variant="outline">
+                        <Button
+                          className="w-full cursor-pointer"
+                          variant="outline"
+                        >
                           Generate Cover Letter
                         </Button>
                       </Link>
@@ -233,7 +271,10 @@ export default function ApplicationsClientPage() {
                     <Link
                       href={`/dashboard/job-applications/new?jobId=${job.id}`}
                     >
-                      <Button className="w-full cursor-pointer" variant="secondary">
+                      <Button
+                        className="w-full cursor-pointer"
+                        variant="secondary"
+                      >
                         Edit Application
                       </Button>
                     </Link>

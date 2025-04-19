@@ -5,8 +5,15 @@ import { NextResponse } from "next/server";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
+const allowedUserId = process.env.NEXT_PUBLIC_ALLOWED_USER_ID!;
+
 export async function POST(req: Request) {
   const { userId } = await auth();
+
+  if (userId !== allowedUserId) {
+    return NextResponse.json({ error: "Access denied" }, { status: 403 });
+  }
+
   if (!userId)
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 

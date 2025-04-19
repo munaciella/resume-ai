@@ -5,10 +5,16 @@ import { supabaseServer } from "@/lib/supabase-server";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
+const allowedUserId = process.env.NEXT_PUBLIC_ALLOWED_USER_ID!;
+
 export async function GET(req: NextRequest) {
   const { userId } = await auth();
   const { searchParams } = new URL(req.url);
   const jobId = searchParams.get("jobId");
+
+  if (userId !== allowedUserId) {
+    return NextResponse.json({ error: "Access denied" }, { status: 403 });
+  }
 
   if (!userId || !jobId) {
     return NextResponse.json({ error: "Unauthorized or missing job ID" }, { status: 401 });

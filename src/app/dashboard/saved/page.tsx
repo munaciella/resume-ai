@@ -103,10 +103,17 @@ export default function SavedJobsPageClient() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-14 space-y-6">
-      <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+        <div>
         <h1 className="text-3xl font-bold text-primary">
           📥 Saved Job Details
         </h1>
+        <p className="text-muted-foreground text-lg mt-4">
+        Here&apos;s a result of all your saved job skills & experience based on
+        the job descriptions parsed.
+      </p>
+        </div>
+
         <div className="flex gap-4">
           <Select value={status} onValueChange={setStatus}>
             <SelectTrigger className="w-[160px]">
@@ -135,17 +142,14 @@ export default function SavedJobsPageClient() {
         </div>
       </div>
 
-      <p className="text-muted-foreground text-lg">
-        Here&apos;s a result of all your saved job skills & experience based on
-        the job descriptions parsed. You can view, edit, or delete them here.
-      </p>
+      
 
       {filtered.length === 0 ? (
         <div className="text-center text-muted-foreground py-20 text-base">
           😕 No saved job details found for <strong>{status}</strong>.
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6">
           {filtered.map((job) => {
             const application = job.applications?.[0];
             const status = application?.status?.toLowerCase();
