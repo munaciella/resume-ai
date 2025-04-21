@@ -14,7 +14,7 @@ import { Menu } from "lucide-react";
 const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md transition-colors duration-300 bg-white/80 dark:bg-slate-900/80 shadow">
-      <div className="flex items-center justify-between px-4 py-2">
+      <div className="flex items-center justify-between px-1 md:px-4 py-2">
         <Link href="/" className="flex items-center space-x-2">
           <div className="w-fit">
             <Image src={logo} alt="logo" height={80} width={80} priority />
@@ -26,8 +26,8 @@ const Navbar = () => {
           {/* Dropdown Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="p-2 rounded-md border text-sm font-medium hover:bg-muted transition cursor-pointer">
-                <Menu className="h-4 w-4" />
+              <button className="p-1 rounded-md border text-sm font-medium hover:bg-muted transition cursor-pointer">
+                <Menu className="h-4 w-4 md:h-6 md:w-6" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">

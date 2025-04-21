@@ -75,11 +75,11 @@ export default function CoverLetterGeneratorPageContent() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 space-y-6">
-      <h1 className="text-3xl font-bold text-[--primary]">
+      <h1 className="text-3xl font-bold text-primary">
         💌 Cover Letter Generator
       </h1>
 
-      <div className="flex justify-end gap-3">
+      <div className="flex justify-end gap-2 md:gap-4">
         <Button
           onClick={() => setEditing((prev) => !prev)}
           variant="outline"
@@ -96,7 +96,7 @@ export default function CoverLetterGeneratorPageContent() {
           {saving ? (
             <Loader2 className="h-4 w-4 animate-spin mr-2" />
           ) : (
-            <Save className="w-4 h-4 mr-2" />
+            <Save className="w-4 h-4" />
           )}
           {saving ? "Saving..." : "Save"}
         </Button>
@@ -105,7 +105,7 @@ export default function CoverLetterGeneratorPageContent() {
           onClick={() => router.push("/dashboard/saved")}
           className="cursor-pointer"
         >
-          📥 View Saved Job Details
+        View Saved Job Details
         </Button>
       </div>
 
