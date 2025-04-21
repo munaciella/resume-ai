@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📄 AI Resume & Cover Letter Generator
 
-## Getting Started
+An AI-powered job application toolkit that helps you generate tailored resumes and cover letters using OpenAI, manage saved jobs, and track application statuses – all securely stored in Supabase.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📚 Table of Contents
+
+- [🚀 Live Demo](#-live-demo)
+- [🛠 Tech Stack](#-tech-stack)
+- [✨ Features](#-features)
+- [🔐 Authentication & Access](#-authentication--access)
+- [📦 Project Structure](#-project-structure)
+- [📸 Screenshots](#-screenshots)
+- [💻 Local Development](#-local-development)
+- [🚀 Deployment](#-deployment)
+- [🧠 Future Improvements](#-future-improvements)
+
+---
+
+## 🚀 Live Demo
+
+🔗 [Click to view the deployed version](https://applywise-one.vercel.app/)
+
+> ⚠️ **Note:** Access is restricted to the app owner. Only the authorized Clerk user ID is allowed to sign in and use AI generation features.
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework:** [Next.js 14](https://nextjs.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.dev/)
+- **Authentication:** [Clerk](https://clerk.com/)
+- **Database:** [Supabase (PostgreSQL)](https://supabase.com/)
+- **AI Generation:** [OpenAI API (GPT-4 / 3.5)](https://platform.openai.com/)
+- **Markdown Rendering:** `react-markdown`
+- **Notifications:** `sonner`
+- **Hosting:** [Vercel](https://vercel.com/)
+
+---
+
+## ✨ Features
+
+✅ Parse job descriptions and extract skills/experience  
+✅ Generate custom-tailored resumes with OpenAI  
+✅ Generate professional cover letters from a pre-defined tone and template  
+✅ Track job applications by status, notes, and linked documents  
+✅ Save and edit resumes and cover letters  
+✅ Fully authenticated experience using Clerk  
+✅ Mobile-responsive UI with modern UX  
+
+---
+
+## 🔐 Authentication & Access
+
+This app is for **personal use only**. Here's how access is restricted:
+
+- **Clerk Middleware:** Only your Clerk `userId` is allowed to access `/dashboard` and `/api` routes.
+- **Sign-in UI Hidden in Production:** The sign-in button is hidden unless `NODE_ENV !== production`.
+- **Restricted Signups:** Clerk settings are set to "Restricted" sign-up mode to prevent new account creation.
+
+---
+
+## 📦 Project Structure
+
+```
+app/
+  ├── api/                       # Server-side API routes
+  ├── dashboard/                 # Main authenticated app pages
+  ├── layout.tsx                # App layout (Navbar, Toaster, ThemeProvider)
+  └── page.tsx                  # Public landing page
+
+components/
+  ├── ui/                        # ShadCN UI components
+  ├── Navbar.tsx
+  ├── InputWithButton.tsx
+  └── ThemeToggle.tsx
+
+lib/
+  ├── supabase-server.ts         # Supabase server client
+  └── utils.ts                   # Any shared helpers
+
+middleware.ts                    # Clerk auth middleware
+.env.local                       # Environment variables
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 💻 Local Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Clone the repo
+```bash
+git clone https://github.com/munaciella/resume-ai
+cd resume-ai
+```
 
-## Learn More
+### 2. Install dependencies
+```bash
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Set up environment variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a `.env.local` file:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env
+CLERK_SECRET_KEY=your_clerk_secret
+CLERK_PUBLISHABLE_KEY=your_clerk_pub_key
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_pub_key
+NEXT_PUBLIC_CLERK_FRONTEND_API=your_clerk_frontend_api
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 
-## Deploy on Vercel
+OPENAI_API_KEY=your_openai_key
+SUPABASE_URL=https://your.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_key
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 4. Run the app locally
+```bash
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🚀 Deployment
+
+The app is ready for [Vercel](https://vercel.com) deployment.
+
+- Push to GitHub and import the repo into Vercel
+- Add all environment variables to the Vercel dashboard
+- Set **sign-up mode to "Restricted"** in Clerk dashboard
+- Deploy 🚀
+
+---
+
+## 🧠 Future Improvements
+
+- Export resume & cover letter as PDF
+- Improved job parsing with AI summarization
+- Email alerts for job application deadlines
+- Admin dashboard to manually manage job/resume/cover letter records
+- Internationalization support
+
+---
+
+## 🧑‍💻 Built by Francesco Vurchio
+
+Connect with me:  
+[LinkedIn](https://linkedin.com/in/francesco-vurchio) • [GitHub](https://github.com/munaciella) • [Website](https://francescovurchio-dev.netlify.app/)
