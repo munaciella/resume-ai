@@ -1,7 +1,8 @@
-import Image from "next/image";
+//import Image from "next/image";
 import Link from "next/link";
 import { SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import logo from "../../public/logo.png";
+// import logoLight from "../../public/logo-light-mode.png";
+// import logoDark from "../../public/logo-dark-mode.png";
 import ThemeToggle from "./ThemeToggle";
 import {
   DropdownMenu,
@@ -10,16 +11,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
+import LogoSwitcher from "./LogoSwitcher";
 
 const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md transition-colors duration-300 bg-white/80 dark:bg-slate-900/80 shadow">
       <div className="flex items-center justify-between px-1 md:px-4 py-2">
         <Link href="/" className="flex items-center space-x-2">
-          <div className="w-fit">
-            <Image src={logo} alt="logo" height={80} width={80} priority />
-          </div>
-          <h1 className="font-bold text-xl">ApplyWise</h1>
+          <LogoSwitcher />
         </Link>
 
         <div className="px-5 flex space-x-2 items-center">
