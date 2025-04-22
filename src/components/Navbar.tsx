@@ -1,8 +1,5 @@
-//import Image from "next/image";
 import Link from "next/link";
 import { SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-// import logoLight from "../../public/logo-light-mode.png";
-// import logoDark from "../../public/logo-dark-mode.png";
 import ThemeToggle from "./ThemeToggle";
 import {
   DropdownMenu,
@@ -41,7 +38,7 @@ const Navbar = () => {
               </DropdownMenuItem>
               <DropdownMenuItem asChild className="cursor-pointer">
                 <Link href="/dashboard/job-applications">
-                  📋 Your Applications
+                  📋 My Applications
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
