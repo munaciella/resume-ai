@@ -15,7 +15,8 @@ import {
 const features = [
   {
     name: "AI-Powered Resume Builder",
-    description: "Generate tailored, professional resumes in seconds using advanced AI.",
+    description:
+      "Generate tailored, professional resumes in seconds using advanced AI.",
     icon: SparklesIcon,
   },
   {
@@ -25,22 +26,26 @@ const features = [
   },
   {
     name: "Job Description Parser",
-    description: "Extract skills and experience from any job posting instantly.",
+    description:
+      "Extract skills and experience from any job posting instantly.",
     icon: FileTextIcon,
   },
   {
     name: "Application Tracker",
-    description: "Track your job application progress, notes, and statuses all in one place.",
+    description:
+      "Track your job application progress, notes, and statuses all in one place.",
     icon: FileCheck2Icon,
   },
   {
     name: "Personalized Dashboard",
-    description: "All your jobs, documents, and statuses, neatly organized in your dashboard.",
+    description:
+      "All your jobs, documents, and statuses, neatly organized in your dashboard.",
     icon: UserCircle2Icon,
   },
   {
     name: "One-Click Save & Export",
-    description: "Save, edit, or export resumes and cover letters with just a click.",
+    description:
+      "Save, edit, or export resumes and cover letters with just a click.",
     icon: RocketIcon,
   },
 ];
@@ -68,26 +73,43 @@ export default function Home() {
 
   return (
     <main className="flex-1 overflow-scroll text-foreground">
-      <div className="py-16 rounded-md shadow-lg">
-        <div className="absolute top-5 right-5">
-        </div>
+      <div className="py-20 rounded-md shadow-lg">
+        <div className="absolute top-5 right-5"></div>
 
         <div className="flex flex-col items-center mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl sm:text-center">
-            <h2 className="text-lg font-semibold leading-7 text-primary">
-              Resume-AI · Your Smart Career Companion
+          <div className="mx-auto max-w-2xl text-center space-y-6 px-6 lg:px-8">
+            <p
+              role="alert"
+              className="inline-block bg-red-100 dark:bg-red-900 px-4 py-2 rounded-md text-red-700 dark:text-red-300 font-medium text-md"
+            >
+              <span className="mr-1">⚠️</span>
+              <strong>Demo Notice:</strong>{" "}
+              <span className="font-light">
+                This live demo is provided solely for testing and development
+                purposes. Functionality may be limited, unstable, or subject to
+                sudden service restrictions. Use at your own risk;
+                production-grade reliability is not guaranteed.
+              </span>
+            </p>
+
+            <h2 className="text-lg font-semibold leading-7 text-primary mt-14">
+              ApplyWise · Your Smart Career Companion
             </h2>
-            <p className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
+            <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
               Land Interviews with Effortless AI-Generated Documents
             </p>
 
             <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
-              Streamline your job hunt with AI-generated resumes, cover letters, and an intuitive
-              dashboard. Let Resume-AI handle the busy work so you can focus on what matters.
+              Streamline your job hunt with AI-generated resumes, cover letters,
+              and an intuitive dashboard. Let ApplyWise handle the busy work so
+              you can focus on what matters.
             </p>
           </div>
 
-          <Button onClick={handleClick} className="mt-10 px-6 py-4 text-lg cursor-pointer">
+          <Button
+            onClick={handleClick}
+            className="mt-10 px-6 py-4 text-lg cursor-pointer"
+          >
             🚀 Get Started
           </Button>
         </div>
